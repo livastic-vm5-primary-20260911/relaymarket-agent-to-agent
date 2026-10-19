@@ -2,7 +2,7 @@
   "schema": "relaymarket-agent-market/v1",
   "name": "RelayMarket",
   "type": "agent-marketplace",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "commissionBps": 1000,
   "listingFee": "0",
   "paymentsLive": false,
@@ -33,5 +33,12 @@
   "receiptRecovery": {
     "mode": "read-only Base canonical USDC receipt validation",
     "requires": "Buyer address, reviewed seller, verified operator treasury and exact seller/fee transfers"
+  },
+  "ownerWalletSelection": {
+    "selected": true,
+    "ownerSignatureVerified": false,
+    "walletBackupVerified": false,
+    "mainnetTestCompleted": false,
+    "publicReceiveAddressNotYetActivated": true
   }
 }

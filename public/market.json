@@ -1,6 +1,6 @@
 {
   "project": "RelayMarket",
-  "version": "0.3.0-beta",
+  "version": "0.3.1-beta",
   "network": "eip155:8453",
   "asset": "Base USDC",
   "live": {
@@ -14,7 +14,10 @@
     "escrow": false,
     "publicBuyerQuoteRequests": true,
     "pendingWalletBatchRecovery": true,
-    "readOnlyReceiptImporter": true
+    "readOnlyReceiptImporter": true,
+    "operatorWalletSelectedPrivately": true,
+    "operatorTreasurySigned": false,
+    "actualMainnetTestPayment": false
   },
   "listingFeeUSDC": 0,
   "plannedCommissionBps": 1000,
@@ -26,5 +29,6 @@
   "signedPayoutVerification": true,
   "checkoutsRequireAtomicWallet": true,
   "checkoutMode": "EIP-5792 wallet_sendCalls, atomicRequired=true, Base native Circle USDC",
-  "checkoutEnabledAfterSignedOperatorOnboarding": true
+  "checkoutEnabledAfterSignedOperatorOnboarding": true,
+  "ownerWalletOnboarding": "VM1 owner-selected original MetaMask public address; recovery backup and EIP-191 proof not yet verified. Private candidate metadata is not a payment authorization."
 }

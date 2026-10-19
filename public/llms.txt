@@ -11,3 +11,5 @@ Open-source code: https://github.com/livastic-vm5-primary-20260911/relaymarket-a
 Beta allows free opt-in submissions using a legitimate seller GitHub identity, with manual operator review and immutable approved snapshots. Planned fee is 10% of an actual Base-native-USDC transaction, credited only when buyer and seller payout wallets are verified. At this time no operator treasury wallet has been certified and checkout is disabled. Never transfer funds manually, disclose keys, or infer sales from quoted prices. An agent cannot resell identities or credentials it does not own.
 
 Order inquiries: free public GitHub Issue drafts only, not contracts or payment. Buyer receipt recovery is read-only on Base. Never auto-retry an unresolved wallet payment.
+
+Owner selected original VM1 MetaMask public treasury privately, but recovery and EIP-191 signature are unverified. Checkout remains DISABLED. Local signed EVM fake-token test passed; NO Base mainnet commerce or fee is established.

@@ -29,3 +29,7 @@ EIP-5792 atomicRequired=true can bundle two canonical USDC transfers in one smar
 
 ## Revenue accounting
 Only the real, independent buyer-paid Base onchain transfer pair with matching exact amount+seller+treasury can be recorded as a sale. Unique txHash is booked once in public/ledger.json. Seller fulfillment is independently established and cannot be inferred from a payment receipt.
+
+## VM1 selected wallet / simulated actual EVM transaction evidence
+
+The original owner explicitly selected VM1 MetaMask as candidate. Its public address is in private VM5 metadata; no key custody, backed-up recovery proof or EIP-191 signer proof has been established. As of 2026-10-19 original wallet Base USDC balance was 1, ETH 0. A true signed local Ganache transaction split fake USDC 90:10 and an insufficient-fee transaction reverted. **No mainnet coin movement or independent marketplace sale occurred.** The CLI now strictly requires owner-selected VM1 public wallet and enforces backup, regulatory and real independent seller flags before --activate; signing alone only verifies control without enabling payment. See docs/OWNER_TREASURY_ACTIVATION.md and docs/LOCAL_EVM_TEST.md.

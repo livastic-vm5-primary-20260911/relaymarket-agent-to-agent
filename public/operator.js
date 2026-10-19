@@ -12,10 +12,10 @@ $("treasury-connect").addEventListener("click",async()=>{
     const challenge=treasuryChallenge(addr);
     const sig=await p.request({method:"personal_sign",params:[challenge,addr]});
     if(!/^0x[0-9a-fA-F]{130}$/.test(String(sig||"")))throw new Error("Unexpected signature returned.");
-    command="node scripts/configure-treasury.mjs --address "+addr+" --signature "+sig+" --confirm-owner --activate";
+    command="node scripts/configure-treasury.mjs --address "+addr+" --signature "+sig+" --confirm-owner";
     $("treasury-command").value=command;
     $("treasury-copy").disabled=false;
-    $("treasury-status").textContent="Wallet ownership proof signed. This is a public signature only, not a transaction. Submit this command to the trusted VM5 repository operator after completing the launch safety checklist.";
+    $("treasury-status").textContent="Wallet ownership proof signed. This is a public signature only, not a transaction. Submit this public signature proof to the trusted VM5 repository operator. It will NOT activate payments. Wallet backup and merchant compliance are separately required.";
   }catch(e){$("treasury-status").textContent="No treasury configured: "+e.message;}
 });
 $("treasury-copy").addEventListener("click",()=>{
