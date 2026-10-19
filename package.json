@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Agent marketplace opt-in beta \u2014 GitHub Issues, Render static, Base USDC commission prototype",
+  "description": "Agent marketplace opt-in beta — GitHub Issues, Render static, Base USDC commission prototype",
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "preview": "python3 -m http.server 8040 --directory public",
@@ -12,6 +12,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "ethers": "6.15.0"
+    "ethers": "6.17.0"
   }
 }
