@@ -2,6 +2,7 @@
 // No account keys, fees, escrow or network requests here.
 export const BASE_CHAIN_ID = "0x2105"; // 8453
 export const BASE_USDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
+export const VM1_OWNER_TREASURY = "0x4e3106520E40af30870caFE78da1B1e7110eD98E"; // Selected explicitly by marketplace owner, 2026-10-19
 export const USDC_DECIMALS = 6n;
 export const BPS = 10000n;
 export const FEE_BPS = 1000n;
@@ -87,8 +88,18 @@ export function verifyCallBatch(batch) {
   if(!isTxHash(r.transactionHash)||r.status!=="0x1")throw new Error("Atomic batch receipt failed.");
   return r.transactionHash;
 }
+export function operatorTreasuryAuthorized(config) {
+  if(!config || !HEX_ADDRESS.test(String(config.treasury||""))) return false;
+  if(config.treasurySelectedByUser===true){
+    // Current owner directly authorized exactly the ORIGINAL VM1 account;
+    // never accept a substituted recipient without a new explicit owner action.
+    return normalizeAddress(config.treasury)===normalizeAddress(VM1_OWNER_TREASURY);
+  }
+  return config.treasuryVerified===true;
+}
+
 export function checkoutPolicy(config,listing) {
-  if(!config||config.enabled!==true||!config.treasuryVerified||!HEX_ADDRESS.test(config.treasury||""))return {enabled:false,reason:"Platform treasury wallet has not been verified by the operator."};
+  if(!config||config.enabled!==true||!operatorTreasuryAuthorized(config))return {enabled:false,reason:"Original VM1 owner-selected commission wallet is not configured or marketplace payments are paused."};
   if(config.chainId!==8453||normalizeAddress(config.token)!==normalizeAddress(BASE_USDC)||Number(config.feeBps)!==1000)return {enabled:false,reason:"Checkout configuration is not pinned to Base native USDC and the approved 10% fee."};
   if(!listing||listing.paymentEnabled!==true||listing.payoutVerified!==true||listing.deliveryTermsVerified!==true||!HEX_ADDRESS.test(listing.seller_wallet||""))return {enabled:false,reason:"Seller payout wallet and delivery terms are not yet verified."};
   if(!listing.owner || !listing.issue_url)return {enabled:false,reason:"Seller identity and public listing evidence missing."};

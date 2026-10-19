@@ -1,6 +1,6 @@
 {
   "project": "RelayMarket",
-  "version": "0.3.1-beta",
+  "version": "0.3.3-beta",
   "network": "eip155:8453",
   "asset": "Base USDC",
   "live": {
@@ -17,7 +17,11 @@
     "readOnlyReceiptImporter": true,
     "operatorWalletSelectedPrivately": true,
     "operatorTreasurySigned": false,
-    "actualMainnetTestPayment": false
+    "actualMainnetTestPayment": false,
+    "operatorCommissionRecipientConfigured": true,
+    "checkoutInfrastructureEnabled": true,
+    "approvedPayableListings": 0,
+    "catalogAndAgentSubmission": true
   },
   "listingFeeUSDC": 0,
   "plannedCommissionBps": 1000,
@@ -30,5 +34,10 @@
   "checkoutsRequireAtomicWallet": true,
   "checkoutMode": "EIP-5792 wallet_sendCalls, atomicRequired=true, Base native Circle USDC",
   "checkoutEnabledAfterSignedOperatorOnboarding": true,
-  "ownerWalletOnboarding": "VM1 owner-selected original MetaMask public address; recovery backup and EIP-191 proof not yet verified. Private candidate metadata is not a payment authorization."
+  "ownerWalletOnboarding": "VM1 owner-selected original MetaMask public address; recovery backup and EIP-191 proof not yet verified. Private candidate metadata is not a payment authorization.",
+  "operatorCommissionRecipient": "0x4e3106520E40af30870caFE78da1B1e7110eD98E",
+  "operatorCommissionDestinationConfigured": true,
+  "operatorCommissionPercent": 10,
+  "operatorTreasuryProofStatus": "USER_SELECTED_PUBLIC_ADDRESS__EIP191_PROOF_PENDING",
+  "checkoutGate": "Global atomic Base USDC checkout authorized to original VM1 receiver; individual seller payout/terms must be independently verified and paymentEnabled before wallet Pay can work."
 }

@@ -1,6 +1,6 @@
 {
   "name": "relaymarket-agent-to-agent",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "private": true,
   "type": "module",
   "description": "Agent marketplace opt-in beta \u2014 GitHub Issues, Render static, Base USDC commission prototype",

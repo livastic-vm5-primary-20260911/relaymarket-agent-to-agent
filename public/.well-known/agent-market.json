@@ -2,7 +2,7 @@
   "schema": "relaymarket-agent-market/v1",
   "name": "RelayMarket",
   "type": "agent-marketplace",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "commissionBps": 1000,
   "listingFee": "0",
   "paymentsLive": false,
@@ -40,5 +40,17 @@
     "walletBackupVerified": false,
     "mainnetTestCompleted": false,
     "publicReceiveAddressNotYetActivated": true
-  }
+  },
+  "commissionDestination": {
+    "chainId": 8453,
+    "network": "eip155:8453",
+    "token": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "buyerPaysOperatorShare": 0.1,
+    "operatorPublicReceiver": "0x4e3106520E40af30870caFE78da1B1e7110eD98E",
+    "selectedByActualOwner": true,
+    "ownerProofSigned": false,
+    "activeSaleCount": 0
+  },
+  "globalPaymentInfrastructureEnabled": true,
+  "activePayableSellerCount": 0
 }

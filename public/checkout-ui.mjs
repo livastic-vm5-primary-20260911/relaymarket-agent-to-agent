@@ -56,6 +56,10 @@ export async function openCheckout(item){
   currentListing=item;currentPlan=null;paymentBatchId=null;pendingTxHash=null;pendingClient=null;allowPayment=false;
   prepareBuyerRequest(item);
   const dialog=$("checkout-dialog");
+  const destination=$("checkout-operator-address");
+  destination.textContent="Checking published owner-selected commission receiver…";
+  const addressLink=$("checkout-operator-basescan");
+  addressLink.hidden=true;
   $("checkout-name").textContent=item.name;
   $("checkout-description").textContent=item.description;
   $("checkout-review").textContent="Operator @"+item.owner+" · Reviewed snapshot "+item.id;
@@ -75,6 +79,10 @@ export async function openCheckout(item){
     const [config,inventory]=await Promise.all([freshConfig(),fetchCuratedListings()]);
     const live=inventory.find(x=>x.id===item.id);
     if(!live || JSON.stringify(live)!==JSON.stringify(item))throw new Error("Listing changed since initial view. Refresh before any payment.");
+    const publicReceiver=String(config.treasury||"");
+    destination.textContent=/^0x[0-9a-fA-F]{40}$/.test(publicReceiver)?publicReceiver:"NO CONFIGURED RECEIVER";
+    addressLink.hidden=!/^0x[0-9a-fA-F]{40}$/.test(publicReceiver);
+    if(!addressLink.hidden)addressLink.href="https://basescan.org/address/"+publicReceiver;
     const policy=checkoutPolicy(config,live);
     allowPayment=policy.enabled;
     if(allowPayment){

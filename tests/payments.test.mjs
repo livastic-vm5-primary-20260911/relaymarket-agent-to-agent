@@ -108,11 +108,12 @@ test("signed seller and operator wallet proofs without reading private keys",asy
   assert.equal(verifySignedAttestation(tc,await signer.signMessage(tc),signer.address),true);
   assert.equal(verifySignedAttestation(tc,sig,signer.address),false);
 });
-test("live checkout config is explicitly disabled and never books simulated commissions",()=>{
+test("operator receiving rail enabled but no unverified seller can collect marketplace commissions",()=>{
   const config=JSON.parse(readFileSync(new URL("../public/checkout-config.json",import.meta.url)));
-  assert.equal(config.enabled,false);
+  assert.equal(config.enabled,true);
   assert.equal(config.treasuryVerified,false);
-  assert.equal(config.treasury,null);
+  assert.equal(config.treasury.toLowerCase(),"0x4e3106520e40af30870cafe78da1b1e7110ed98e");
+  assert.equal(config.treasurySelectedByUser,true);
   const market=JSON.parse(readFileSync(new URL("../public/market.json",import.meta.url)));
   assert.equal(market.actualCommissionReceivedUSDC,0);
 });

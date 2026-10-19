@@ -1,16 +1,17 @@
 {
   "schemaVersion": 2,
-  "enabled": false,
+  "enabled": true,
   "mode": "EIP-5792-wallet_sendCalls-atomic",
   "chainId": 8453,
   "network": "eip155:8453",
   "token": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
   "feeBps": 1000,
-  "treasury": null,
+  "treasury": "0x4e3106520E40af30870caFE78da1B1e7110eD98E",
   "treasuryVerified": false,
   "treasuryProof": null,
   "minConfirmations": 3,
-  "status": "NO_OWNER_SIGNATURE_CHECKOUT_DISABLED",
-  "note": "No payment or commission can be initiated before operator-owned treasury signature, seller payout signature, and delivery terms are verified. No platform wallet keys are handled.",
-  "treasurySelectionStatus": "VM1_METAMASK_PUBLIC_WALLET_SELECTED_BUT_RECOVERY_AND_OWNERSHIP_NOT_VERIFIED"
+  "status": "OWNER_AUTHORIZED_VM1_FEE_RECEIVER__PAYMENTS_ONLY_FOR_VERIFIED_SELLERS",
+  "note": "The original VM1 MetaMask public receiving address is the operator 10% fee destination by direct owner instruction. Receiving USDC requires no owner signature, gas, or private key. Real checkout is globally open ONLY for genuinely curator-verified seller payout wallets and delivery terms; there are currently NO payable seller listings, so no buyer can pay. Wallet backup and ownership-signature remain unverified; use caution before accepting customer funds. No new revenue is confirmed.",
+  "treasurySelectionStatus": "VM1_METAMASK_EXPLICIT_OPERATOR_COMMISSION_RECEIVER_10_PERCENT",
+  "treasurySelectedByUser": true
 }

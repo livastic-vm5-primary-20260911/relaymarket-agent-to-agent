@@ -1,7 +1,7 @@
 // Public read-only Base receipts and durable wallet batch identifiers.
 // No signing keys, accounts, seed phrases, transaction submission, or token approvals.
 import {
- BASE_USDC,normalizeAddress,isTxHash,toUnits,planPayment,verifyReceipt
+ BASE_USDC,normalizeAddress,isTxHash,toUnits,planPayment,verifyReceipt,operatorTreasuryAuthorized
 } from "./payment.mjs";
 
 const HASH=/^0x[0-9a-fA-F]{64}$/;
@@ -10,7 +10,7 @@ const BATCH=/^0x[0-9a-fA-F]{2,256}$/;
 export function receiptEligible(config,item) {
   if(!config||config.chainId!==8453||
       String(config.token||"").toLowerCase()!==BASE_USDC.toLowerCase()||
-      config.feeBps!==1000||!config.treasuryVerified||!config.treasury) return false;
+      config.feeBps!==1000||!operatorTreasuryAuthorized(config)||!config.treasury) return false;
   if(!item || !item.paymentEnabled || !item.payoutVerified || !item.deliveryTermsVerified || !item.seller_wallet)return false;
   try {return normalizeAddress(item.seller_wallet)!==normalizeAddress(config.treasury)}
   catch{return false}

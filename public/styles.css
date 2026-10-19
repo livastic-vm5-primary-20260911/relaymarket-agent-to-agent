@@ -67,3 +67,8 @@
 .buyer-request-form button{justify-self:start;grid-column:1/-1}
 #buyer-request-status{grid-column:1/-1;color:#246244;font-size:12px;line-height:1.7}
 @media(max-width:620px){.buyer-request-form{grid-template-columns:1fr}.buyer-request-form>label:first-child,.buyer-request-form .buyer-request-checkbox,.buyer-request-form button,#buyer-request-status{grid-column:1}}
+
+.operator-payee{padding:14px 0 6px;display:flex;flex-direction:column;gap:8px}
+.operator-payee>span{font-size:11px;font-weight:750;color:#285c48}
+.operator-payee>code{font-size:11px;word-break:break-all;line-height:1.5;background:#e6f3eb;color:#194635;padding:10px;border-radius:8px}
+.operator-payee>a{font-size:11px;color:#17684c;text-decoration:underline}

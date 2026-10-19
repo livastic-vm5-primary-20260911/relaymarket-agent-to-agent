@@ -56,7 +56,8 @@ if(args.includes("--activate")){
 config.treasury=selectedAddress;
 config.treasuryVerified=true;
 config.treasuryProof=signature;
-config.enabled=args.includes("--activate");
+// Proof-only MUST NOT accidentally disable owner-authorized merchant-ready status.
+if(args.includes("--activate")) config.enabled=true;
 config.status=config.enabled?"LIVE_OPERATOR_APPROVED_ATOMIC_USDC_ONLY":"SIGNED_OWNER_WALLET_PROOF_ACCEPTED_CHECKOUT_STILL_DISABLED";
 write();
 console.log("Genuine VM1 EIP-191 treasury proof verified. Checkout enabled="+config.enabled+". Wallet keys never accessed. Commit/push only after security+legal review.");

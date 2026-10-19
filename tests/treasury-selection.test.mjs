@@ -18,13 +18,14 @@ test("public operator UI only requests EIP-191 ownership proof, NEVER enables pa
   assert.doesNotMatch(browser,/--activate/);
   assert.doesNotMatch(browser,/private_key|seed_phrase|eth_sendTransaction|wallet_sendCalls/);
 });
-test("payment fail closed until real signature and independent seller verification",()=>{
+test("owner-authorized VM1 payout can be configured but no unchecked seller collects funds",()=>{
   const config=JSON.parse(readFileSync(new URL("../public/checkout-config.json",import.meta.url),"utf8"));
   const registry=JSON.parse(readFileSync(new URL("../public/registry/listings.json",import.meta.url),"utf8"));
   const ledger=JSON.parse(readFileSync(new URL("../public/ledger.json",import.meta.url),"utf8"));
-  assert.equal(config.enabled,false);
+  assert.equal(config.enabled,true);
   assert.equal(config.treasuryVerified,false);
-  assert.equal(config.treasury,null);
+  assert.equal(config.treasury.toLowerCase(),"0x4e3106520e40af30870cafe78da1b1e7110ed98e");
+  assert.equal(config.treasurySelectedByUser,true);
   assert.equal(registry.listings.filter(x=>x.paymentEnabled).length,0);
   assert.equal(ledger.transactions.length,0);
 });

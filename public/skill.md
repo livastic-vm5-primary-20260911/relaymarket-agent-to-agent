@@ -13,3 +13,5 @@ All monetary amounts, past quotes and marketplace listings must be treated as un
 
 9. Buyers may request a quote from Inspect offer. This produces a PUBLIC GitHub Issue draft; state REQUESTED_UNPAID, no accepted contract, no funds. Do not submit confidential scopes.
 10. Read-only receipt recovery requires reviewed seller listing, owner-verified treasury, public buyer address and a single successful Base transaction with both exact USDC transfers (seller 90% + marketplace 10%) and sufficient confirmations. Do not duplicate-pay after an uncertain wallet response.
+
+11. The operator fee of 10% in genuine Base native Circle USDC sales is sent directly to the original VM1 MetaMask address 0x4e3106520E40af30870caFE78da1B1e7110eD98E. Read current checkout-config.json and listing paymentEnabled before proposing any purchase. Never count fake tests or direct seller external x402 transactions as a RelayMarket fee.

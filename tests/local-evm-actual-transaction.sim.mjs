@@ -4,6 +4,7 @@
 // real tokens are touched. Does not claim marketplace revenue.
 import assert from "node:assert/strict";
 import {createRequire} from "node:module";
+import {readFileSync} from "node:fs";
 import {BASE_USDC,planPayment,verifyReceipt} from "../public/payment.mjs";
 import {readConfirmedBaseTx} from "../public/receipt-tools.mjs";
 
@@ -55,8 +56,13 @@ if(errors.length)throw new Error(errors.map(x=>x.formattedMessage).join("\n"));
 const contracts=compiled.contracts["RelayMarketLocal.sol"];
 const g=makeChain({chain:{chainId:8453,hardfork:"shanghai"},wallet:{totalAccounts:4,defaultBalance:100},logging:{quiet:true}});
 const provider=new ethers.BrowserProvider(g);
-const [owner,sellerSigner,treasurySigner]=await Promise.all([provider.getSigner(0),provider.getSigner(1),provider.getSigner(2)]);
-const seller=await sellerSigner.getAddress(),treasury=await treasurySigner.getAddress();
+const [owner,sellerSigner]=await Promise.all([provider.getSigner(0),provider.getSigner(1)]);
+const seller=await sellerSigner.getAddress();
+const receiverMeta=JSON.parse(readFileSync(new URL("../../../accounts/relaymarket_vm1_treasury_candidate.json",import.meta.url)));
+const treasury=receiverMeta.publicAddress;
+assert.equal(receiverMeta.chainId,8453);
+assert.match(treasury,/^0x[0-9a-fA-F]{40}$/);
+assert.notEqual(treasury.toLowerCase(),seller.toLowerCase());
 const mockFactory=new ethers.ContractFactory(contracts.LocalMockUSDC.abi,contracts.LocalMockUSDC.evm.bytecode.object,owner);
 const token=await mockFactory.deploy();await token.waitForDeployment();
 const walletFactory=new ethers.ContractFactory(contracts.LocalAtomicSmartAccount.abi,contracts.LocalAtomicSmartAccount.evm.bytecode.object,owner);
@@ -112,6 +118,9 @@ console.log(JSON.stringify({
  localTransactionHash:actualTx.hash,
  mockSellerReceived:"0.900000",
  mockPlatformReceived:"0.100000",
+ publicVM1OwnerReceiver:treasury,
+ originalVM1WalletKeysTouched:false,
+ operatorReceiptNeedsNoSignatureOrGas:true,
  independentReceiptVerification:"PASS",
  atomicSecondLegInsufficientFundsRollback:"PASS",
  testCases:2,

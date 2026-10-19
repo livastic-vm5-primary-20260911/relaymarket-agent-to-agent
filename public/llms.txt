@@ -12,4 +12,5 @@ Beta allows free opt-in submissions using a legitimate seller GitHub identity, w
 
 Order inquiries: free public GitHub Issue drafts only, not contracts or payment. Buyer receipt recovery is read-only on Base. Never auto-retry an unresolved wallet payment.
 
-Owner selected original VM1 MetaMask public treasury privately, but recovery and EIP-191 signature are unverified. Checkout remains DISABLED. Local signed EVM fake-token test passed; NO Base mainnet commerce or fee is established.
+Owner selected original VM1 MetaMask public treasury privately, but recovery and EIP-191 signature are unverified. Globally enabled for vendor-verified listings but no seller is individually payment-enabled yet. Local signed EVM fake-token test passed; NO Base mainnet commerce or fee is established.
+Original owner MetaMask public commission receiver: 0x4e3106520E40af30870caFE78da1B1e7110eD98E, Base native USDC, 10 percent per verified qualified external transaction. Current actual platform fee = 0 USDC.

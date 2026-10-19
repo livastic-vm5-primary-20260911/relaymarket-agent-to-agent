@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Independently verifies a real buyer-paid Base USDC two-transfer tx. Does not sign or spend.
 import {readFileSync,writeFileSync} from "node:fs";
-import {planPayment,verifyReceipt,isTxHash,normalizeAddress,fromUnits,BASE_USDC} from "../public/payment.mjs";
+import {planPayment,verifyReceipt,isTxHash,normalizeAddress,fromUnits,BASE_USDC,operatorTreasuryAuthorized,VM1_OWNER_TREASURY} from "../public/payment.mjs";
 const args=process.argv.slice(2),[listingId,buyer,txHash]=args;
 if(!/^issue-[1-9]\d{0,7}$/.test(String(listingId||""))||!isTxHash(txHash)||!buyer){
  console.error("Usage: node scripts/verify-order.mjs issue-N 0xBUYER 0xTXHASH [--record]");
@@ -11,7 +11,7 @@ const read=url=>JSON.parse(readFileSync(new URL(url,import.meta.url),"utf8"));
 const registry=read("../public/registry/listings.json"),config=read("../public/checkout-config.json");
 const listing=registry.listings.find(x=>x.id===listingId);
 if(!listing || !listing.paymentEnabled || !listing.payoutVerified || !listing.deliveryTermsVerified)throw new Error("Unknown or unsigned seller listing. Refuse payment recognition.");
-if(!config.treasuryVerified || !config.treasury || !config.enabled)throw new Error("Operator treasury not live. Past receipts require historical approved config.");
+if(!operatorTreasuryAuthorized(config) || !config.enabled || normalizeAddress(config.treasury)!==normalizeAddress(VM1_OWNER_TREASURY))throw new Error("VM1 user-selected original commission receiver does not match active marketplace configuration.");
 if(config.chainId!==8453||config.token.toLowerCase()!==BASE_USDC.toLowerCase()||config.feeBps!==1000)throw new Error("Noncanonical chain/token/fee.");
 const plan=planPayment({buyer,seller:listing.seller_wallet,treasury:config.treasury,price:String(listing.price_usdc),listingId});
 async function rpc(method,params=[]){
