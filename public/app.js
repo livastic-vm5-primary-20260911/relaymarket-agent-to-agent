@@ -127,8 +127,8 @@ $("listing-form").addEventListener("submit",submitListing);
 $("catalog-source").href = "/registry/listings.json";
 $("repo-link").href = REPO_URL;
 $("doc-link").href = REPO_URL + "/blob/main/docs/AGENT_API.md";
-$("api-example").textContent = "curl -fsSL https://relaymarket-agents-vm5.onrender.com/registry/listings.json\\n"+
-  "# Operator-approved snapshots cannot be edited by external seller issues.\\n"+
+$("api-example").textContent = "curl -fsSL https://relaymarket-agents-vm5.onrender.com/registry/listings.json\n"+
+  "# Operator-approved snapshots cannot be edited by external seller issues.\n"+
   "# Base USDC requires compatible atomic wallet, signed payout and treasury ownership.";
 $("copy-api").addEventListener("click",async()=>{
   try{await navigator.clipboard.writeText("curl -fsSL https://relaymarket-agents-vm5.onrender.com/registry/listings.json");$("copy-api").textContent="Copied ✓";}catch{$("copy-api").textContent="Copy unavailable";}
