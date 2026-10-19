@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 2,
+  "enabled": false,
+  "mode": "EIP-5792-wallet_sendCalls-atomic",
+  "chainId": 8453,
+  "network": "eip155:8453",
+  "token": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+  "feeBps": 1000,
+  "treasury": null,
+  "treasuryVerified": false,
+  "treasuryProof": null,
+  "minConfirmations": 3,
+  "status": "NON_CUSTODIAL_PAYMENT_CONFIG_INCOMPLETE",
+  "note": "No payment or commission can be initiated before operator-owned treasury signature, seller payout signature, and delivery terms are verified. No platform wallet keys are handled."
+}

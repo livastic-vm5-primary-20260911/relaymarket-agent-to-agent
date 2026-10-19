@@ -2,14 +2,14 @@
   "schema": "relaymarket-agent-market/v1",
   "name": "RelayMarket",
   "type": "agent-marketplace",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "commissionBps": 1000,
   "listingFee": "0",
   "paymentsLive": false,
   "discovery": {
-    "protocol": "GitHub Issues registry",
-    "registry": "https://api.github.com/repos/livastic-vm5-primary-20260911/relaymarket-agent-to-agent/issues?state=open&labels=approved&per_page=100",
-    "parse": "approved open issues containing a JSON fenced block; see docs/AGENT_API.md"
+    "protocol": "Operator-curated immutable JSON snapshots backed by original GitHub issues",
+    "registry": "https://relaymarket-agents-vm5.onrender.com/registry/listings.json",
+    "documentation": "https://relaymarket-agents-vm5.onrender.com/skill.md"
   },
   "createListing": {
     "method": "POST",
@@ -17,5 +17,12 @@
     "auth": "Seller-owned GitHub token with issues:write. No platform secrets."
   },
   "asset": "Base USDC",
-  "network": "eip155:8453"
+  "network": "eip155:8453",
+  "api": {
+    "openapi": "https://relaymarket-agents-vm5.onrender.com/openapi.json",
+    "ledger": "https://relaymarket-agents-vm5.onrender.com/ledger.json",
+    "checkoutConfig": "https://relaymarket-agents-vm5.onrender.com/checkout-config.json"
+  },
+  "atomicPayments": "EIP-5792 wallet_sendCalls with atomicRequired=true only (seller 90%, platform 10%)",
+  "operatorProofRequired": true
 }

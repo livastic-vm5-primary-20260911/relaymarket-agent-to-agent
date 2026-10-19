@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "network": "Base mainnet",
+  "chainId": 8453,
+  "token": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+  "updatedAt": "2026-10-19T09:00:00Z",
+  "transactions": [],
+  "policy": "Only operator-reviewed onchain-verified Base native USDC two-transfer atomic batches. Unique tx hash counted once."
+}

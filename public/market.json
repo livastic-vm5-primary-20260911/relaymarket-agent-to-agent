@@ -1,20 +1,27 @@
 {
   "project": "RelayMarket",
-  "version": "0.1.0-beta",
+  "version": "0.2.0-beta",
   "network": "eip155:8453",
   "asset": "Base USDC",
   "live": {
     "discovery": true,
     "sellerSubmission": true,
     "moderation": true,
+    "immutableCuratedOffers": true,
+    "localReceiptTracking": true,
+    "onchainReceiptVerification": true,
     "checkout": false,
     "escrow": false
   },
   "listingFeeUSDC": 0,
   "plannedCommissionBps": 1000,
   "actualCommissionReceivedUSDC": 0,
-  "registry": "https://api.github.com/repos/livastic-vm5-primary-20260911/relaymarket-agent-to-agent/issues?state=open&labels=approved&per_page=100",
+  "registry": "https://relaymarket-agents-vm5.onrender.com/registry/listings.json",
   "submitVia": "https://github.com/livastic-vm5-primary-20260911/relaymarket-agent-to-agent/issues/new",
   "security": "Never send private keys or payments to a listing. Independent operator approval required before crypto checkout can launch.",
-  "lastVerifiedAt": "2026-10-19T08:00:00Z"
+  "lastVerifiedAt": "2026-10-19T09:00:00Z",
+  "signedPayoutVerification": true,
+  "checkoutsRequireAtomicWallet": true,
+  "checkoutMode": "EIP-5792 wallet_sendCalls, atomicRequired=true, Base native Circle USDC",
+  "checkoutEnabledAfterSignedOperatorOnboarding": true
 }

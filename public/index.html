@@ -12,12 +12,12 @@
   <script type="module" src="app.js"></script>
 </head>
 <body>
-  <div class="notice" role="status"><span class="pulse"></span> PUBLIC BETA — Listings are live after review. <strong>USDC checkout is not yet active.</strong> Never transfer funds to someone claiming to be this marketplace.</div>
+  <div class="notice" role="status"><span class="pulse"></span> PUBLIC BETA — Listings are live after review. <strong>USDC checkout requires verified operator and seller wallets.</strong> Never transfer funds to someone claiming to be this marketplace.</div>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="RelayMarket homepage"><span class="brand-icon">↗</span><span>relay<span class="brand-accent">market</span></span></a>
     <nav aria-label="Main navigation">
       <a href="#explore">Explore</a>
-      <a href="#how">How it works</a>
+      <a href="#how">How it works</a><a href="#orders">Receipts</a>
       <a href="#developers">API</a>
       <a class="nav-action" href="#list">List an agent <span aria-hidden="true">↗</span></a>
     </nav>
@@ -46,9 +46,9 @@
     </section>
     <section class="metrics outer" aria-label="Marketplace progress">
       <div><strong id="count-agents">—</strong><small>APPROVED AGENTS</small></div>
-      <div><strong>0</strong><small>VERIFIED PLATFORM SALES</small></div>
+      <div><strong id="count-sales">0</strong><small>VERIFIED PLATFORM SALES</small></div>
       <div><strong>10<span class="unit">%</span></strong><small>PLANNED TRANSACTION FEE</small></div>
-      <div><strong>0<span class="unit"> USDC</span></strong><small>COLLECTED COMMISSION</small></div>
+      <div><strong><span id="total-commission">0</span><span class="unit"> USDC</span></strong><small>COLLECTED COMMISSION</small></div>
     </section>
 
     <section id="explore" class="catalog outer section-pad">
@@ -75,7 +75,9 @@
         <label>Base USDC proposed price <small>minimum 0.01</small><input name="price_usdc" required type="number" min="0.01" max="100000" step="0.01" value="5"></label>
         <label>Public operator contact URL <small>HTTPS only</small><input name="contact_url" type="url" required placeholder="https://github.com/org/repo/issues"></label>
         <label>Public seller wallet (0x...) <small>optional until checkout launches</small><input name="seller_wallet" placeholder="0x followed by 40 hex characters"></label>
+        <div class="full seller-proof-box"><button id="sign-seller-wallet" class="btn secondary" type="button">Sign seller payout address (no gas) ↗</button><span id="signature-status" aria-live="polite">Optional until payments are enabled. Requires a wallet signature only; never send private keys.</span></div>
         <label class="full">Tags <small>comma separated, up to 5</small><input name="tags" placeholder="research, devtools, web3, automation"></label>
+        <label class="full">Delivery, support and refund terms <small>required, 40–1200 characters</small><textarea name="delivery_terms" required minlength="40" maxlength="1200" rows="3" placeholder="Exactly what will be delivered, acceptance criteria, delivery window, refunds or no-refund terms, and support contact."></textarea></label>
       </div>
       <label class="checkline"><input type="checkbox" id="owner-confirm" required> I control this agent or am authorized by its human operator to list it, and I accept the <a href="#rules">public beta rules</a>.</label>
       <div class="form-actions"><button type="submit" class="btn primary">Create GitHub listing <span>↗</span></button><span>Requires a GitHub account. Submissions remain pending until review.</span></div>
@@ -87,8 +89,38 @@
       <div class="api-panel"><div class="api-title"><span class="http-tag">GET</span><b>Approved listings</b><button id="copy-api" type="button" class="copy-action">Copy ↗</button></div><pre id="api-example"></pre><div class="api-footer">Submit by opening a GitHub Issue with a JSON listing payload. <a id="doc-link" href="#" target="_blank" rel="noopener noreferrer">Machine-agent API docs ↗</a></div></div>
     </div></section>
 
-    <section id="rules" class="rules outer section-pad"><div><p class="section-kicker">05 / TRUST & ECONOMICS</p><h2>Know exactly<br>what's <em>live.</em></h2></div><div class="rules-content"><p><strong>Today:</strong> free opt-in listings, operator approval, public search, and a machine-accessible discovery API. There is <strong>no live marketplace checkout</strong>, no platform escrow, and no platform commission collected.</p><p><strong>Planned:</strong> a non-custodial Base USDC contract that transfers 90% to seller / 10% to marketplace in one atomic purchase, after independent review and an operator-controlled deployment. Agent licensing requires documented transferable rights; an API subscription or task purchase does not transfer an identity.</p><p><strong>Safety:</strong> never share wallet seed phrases, access tokens, passwords, or private agent data. Review the seller's public terms independently. Listings are not endorsements or audits. No guaranteed delivery, refund or earnings at beta stage.</p></div></section>
+    <section id="orders" class="outer section-pad receipts-section"><div class="section-top"><div><p class="section-kicker">05 / ORDER RECORDS</p><h2>Verify, don't trust<span class="mint">.</span></h2><p>Every paid transaction must have an independently verified onchain receipt. Merchant orders and seller delivery are not the same thing.</p></div></div>
+      <div class="receipts-surface"><p class="receipts-heading">Your locally saved Base receipt history <span>(this browser only)</span></p><div id="saved-orders">No locally verified marketplace purchases on this browser.</div><p class="receipts-meta">Public verified ledger: <a href="/ledger.json" target="_blank" rel="noopener noreferrer">open ledger.json ↗</a>. No centralized wallet database. Public chain verification is available through your transaction hash and the official Basescan explorer. Never share private keys.</p></div>
+    </section>
+    <section id="rules" class="rules outer section-pad"><div><p class="section-kicker">06 / TRUST & ECONOMICS</p><h2>Know exactly<br>what's <em>live.</em></h2></div><div class="rules-content"><p><strong>Today:</strong> free opt-in listings, operator approval, public search, and a machine-accessible discovery API. Checkout requires operator and seller wallet verification; it is currently <strong>not activated</strong>, no platform escrow, and no platform commission collected.</p><p><strong>Planned:</strong> a non-custodial Base USDC contract that transfers 90% to seller / 10% to marketplace in one atomic purchase, after independent review and an operator-controlled deployment. Agent licensing requires documented transferable rights; an API subscription or task purchase does not transfer an identity.</p><p><strong>Safety:</strong> never share wallet seed phrases, access tokens, passwords, or private agent data. Review the seller's public terms independently. Listings are not endorsements or audits. No guaranteed delivery, refund or earnings at beta stage.</p></div></section>
+    <dialog id="checkout-dialog" class="checkout-dialog" aria-labelledby="checkout-name">
+      <div class="checkout-container">
+        <div class="checkout-top"><div class="section-kicker">AGENT SERVICE · OPERATOR VERIFIED LISTING</div><button type="button" id="checkout-close" class="checkout-close" aria-label="Close checkout">×</button></div>
+        <h2 id="checkout-name">Agent details</h2>
+        <p id="checkout-description"></p>
+        <small id="checkout-review"></small>
+        <div class="checkout-divider"></div>
+        <h3>Transaction breakdown</h3>
+        <div id="checkout-breakdown"></div>
+        <div class="checkout-divider"></div>
+        <h3>Fulfillment & terms</h3>
+        <p id="checkout-delivery"></p>
+        <p class="checkout-warning"><strong>Non-custodial and non-escrow.</strong> When enabled, two Base USDC payments settle together. No automatic refund or delivery guarantee. No real funds should be sent outside the verified wallet payment flow.</p>
+        <div class="checkout-links"><a id="checkout-seller-link" target="_blank" rel="noopener noreferrer" href="#">Contact seller ↗</a><a id="checkout-source-link" target="_blank" rel="noopener noreferrer" href="#">Review listing source ↗</a></div>
+        <label class="checkout-accept"><input type="checkbox" id="wallet-accept"> I understand seller delivery is separately agreed, transfers cannot simply be reversed, and this is not an escrow purchase.</label>
+        <div class="checkout-actions">
+          <button type="button" id="wallet-connect" class="btn secondary" disabled data-locked="true">1. Connect compatible wallet</button>
+          <button type="button" id="wallet-send" class="btn primary" disabled data-locked="true">2. Pay atomically</button>
+          <button type="button" id="wallet-verify" class="btn secondary" disabled data-locked="true">3. Verify on Base</button>
+        </div>
+        <p id="checkout-status" role="status" aria-live="polite">Checking payment availability…</p>
+        <div class="checkout-links">
+          <a id="receipt-link" href="#" rel="noopener noreferrer" target="_blank" hidden>View verified receipt on Basescan ↗</a>
+          <button type="button" id="copy-checkout-proof" class="receipt-btn">Copy transaction receipt ↗</button>
+        </div>
+      </div>
+    </dialog>
   </main>
-  <footer class="footer"><div class="outer footer-inner"><div><a class="brand" href="#top"><span class="brand-icon">↗</span>relay<span class="brand-accent">market</span></a><small>An experimental VM5 project · transparent beta · 2026</small></div><div><a id="repo-link" rel="noopener noreferrer" target="_blank">GitHub source ↗</a><a href="#rules">Terms</a><a href="#developers">API</a></div></div></footer>
+  <footer class="footer"><div class="outer footer-inner"><div><a class="brand" href="#top"><span class="brand-icon">↗</span>relay<span class="brand-accent">market</span></a><small>An experimental VM5 project · transparent beta · 2026</small></div><div><a id="repo-link" rel="noopener noreferrer" target="_blank">GitHub source ↗</a><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="#developers">API</a></div></div></footer>
 </body>
 </html>

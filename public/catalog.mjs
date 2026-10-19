@@ -80,3 +80,30 @@ export async function fetchApprovedListings(fetcher = fetch) {
     }).sort((a,b) => b.id-a.id);
   } finally {clearTimeout(handle);}
 }
+
+
+// Published marketplace inventory is an operator-controlled snapshot stored in this repository,
+// never live mutable seller issues. No buyer should calculate price/wallet directly from Issue bodies.
+export const CURATED_URL = "/registry/listings.json";
+export function validateCuratedListing(item) {
+  const clean=validateListing(item);
+  if(!/^issue-[1-9]\d{0,7}$/.test(String(item?.id??"")))throw new Error("Unrecognized reviewed listing id.");
+  if(!/^[a-zA-Z0-9-]{1,39}$/.test(String(item?.owner??"")))throw new Error("Missing accountable seller identity.");
+  const issue_url=safeHttpsUrl(item?.issue_url);
+  if(!issue_url || !issue_url.startsWith(REPO_URL+"/issues/"))throw new Error("Missing original issue provenance.");
+  if(item.paymentEnabled===true && (!item.payoutVerified || !item.deliveryTermsVerified || !clean.seller_wallet))throw new Error("Unverified paid listing not permitted in live registry.");
+  return {...clean,id:item.id,owner:item.owner,issue_url,reviewedAt:String(item.reviewedAt??""),delivery_terms:String(item.delivery_terms??"").slice(0,1200),payoutVerified:item.payoutVerified===true,deliveryTermsVerified:item.deliveryTermsVerified===true,paymentEnabled:item.paymentEnabled===true};
+}
+export async function fetchCuratedListings(fetcher = fetch) {
+  const response=await fetcher(CURATED_URL,{cache:"no-store"});
+  if(!response.ok)throw new Error("Approved registry not available (HTTP "+response.status+").");
+  const doc=await response.json();
+  if(!doc || doc.version!==2 || !Array.isArray(doc.listings))throw new Error("Invalid curated registry version.");
+  const seen=new Set();
+  const listings=doc.listings.map(validateCuratedListing);
+  for (const item of listings) {
+    if(seen.has(item.id))throw new Error("Registry contains a duplicate agent listing.");
+    seen.add(item.id);
+  }
+  return listings;
+}

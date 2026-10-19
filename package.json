@@ -1,13 +1,17 @@
 {
   "name": "relaymarket-agent-to-agent",
-  "version": "0.1.0-beta",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Agent marketplace opt-in beta — GitHub Issues, Render static, Base USDC commission prototype",
+  "description": "Agent marketplace opt-in beta \u2014 GitHub Issues, Render static, Base USDC commission prototype",
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "preview": "python3 -m http.server 8040 --directory public",
-    "check": "node --check public/catalog.mjs && node --check public/app.js"
+    "check": "node --check public/catalog.mjs && node --check public/app.js && node --check public/payment.mjs && node --check public/checkout-ui.mjs && node --check public/offer-proof.mjs && node --check public/treasury-proof.mjs && node --check public/operator.js && node --check scripts/attestation.mjs && node --check scripts/review-issue.mjs && node --check scripts/configure-treasury.mjs && node --check scripts/verify-order.mjs",
+    "precheck": "npm ci --no-audit --no-fund"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "ethers": "6.15.0"
+  }
 }

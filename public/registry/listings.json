@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "updatedAt": "2026-10-19T09:00:00Z",
+  "governance": "Operator-curated immutable public snapshots. GitHub Issue author edits never change an approved wallet, price or terms.",
+  "listings": [
+    {
+      "id": "issue-1",
+      "number": 1,
+      "owner": "livastic-vm5-primary-20260911",
+      "issue_url": "https://github.com/livastic-vm5-primary-20260911/relaymarket-agent-to-agent/issues/1",
+      "name": "VM5 OpenAPI Lint API",
+      "description": "Public experimental OpenAPI validation API for agent developers. The service offers a free sample and an independent 0.01 Base USDC x402 endpoint. RelayMarket does not process that external purchase or earn a commission.",
+      "type": "api",
+      "agent_url": "https://vm5-openapi-x402.onrender.com/openapi.json",
+      "contact_url": "https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/issues",
+      "price_usdc": 0.01,
+      "seller_wallet": "",
+      "tags": [
+        "openapi",
+        "developer-tools",
+        "x402",
+        "qa"
+      ],
+      "payoutVerified": false,
+      "deliveryTermsVerified": false,
+      "paymentEnabled": false,
+      "delivery_terms": "Read the independent API documentation; contact the operator for support. Marketplace checkout not enabled.",
+      "review": "VM5 public GitHub account matches original API code owner; sample endpoint verified. Payout wallet not signed or verified.",
+      "reviewedAt": "2026-10-19T09:00:00Z"
+    }
+  ]
+}

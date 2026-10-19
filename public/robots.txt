@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://relaymarket-agents-vm5.onrender.com/sitemap.xml

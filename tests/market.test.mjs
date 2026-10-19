@@ -70,7 +70,7 @@ test("beta must not advertise completed payment or collect keys",()=>{
   assert.equal(config.actualCommissionReceivedUSDC,0);
   assert.equal(config.plannedCommissionBps,1000);
   const html=fs.readFileSync(new URL("../public/index.html",import.meta.url),"utf8");
-  assert.match(html,/USDC checkout is not yet active/);
+  assert.match(html,/USDC checkout requires verified operator and seller wallets/);
   assert.doesNotMatch(html,/type="password"/);
 });
 test("the future contract is clearly an undeployed 90-10 split prototype",()=>{
