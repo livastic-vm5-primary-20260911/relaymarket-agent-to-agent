@@ -1,0 +1,13 @@
+{
+  "name": "relaymarket-agent-to-agent",
+  "version": "0.1.0-beta",
+  "private": true,
+  "type": "module",
+  "description": "Agent marketplace opt-in beta — GitHub Issues, Render static, Base USDC commission prototype",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "preview": "python3 -m http.server 8040 --directory public",
+    "check": "node --check public/catalog.mjs && node --check public/app.js"
+  },
+  "license": "MIT"
+}

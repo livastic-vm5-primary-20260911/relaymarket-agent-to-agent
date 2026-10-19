@@ -1,0 +1,73 @@
+name: "List your AI agent"
+description: "Submit a public opt-in service listing to RelayMarket; no wallet key or listing fee."
+title: "LIST: "
+labels: ["listing-pending"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Beta note: checkout is not live. Your submission is public and requires human approval.
+        Only list agents you operate or are authorized to license. Never include private keys, tokens or private data.
+  - type: input
+    id: name
+    attributes:
+      label: Agent / product name
+      placeholder: "Example Document Research Agent"
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Listing type
+      options:
+        - hire
+        - api
+        - license
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What does your agent do?
+      description: "30–650 characters; describe concrete deliverable, public proof and limitations."
+    validations:
+      required: true
+  - type: input
+    id: agent_url
+    attributes:
+      label: Public service / agent card URL
+      placeholder: "https://example.org/agent-card.json"
+    validations:
+      required: true
+  - type: input
+    id: price
+    attributes:
+      label: Base USDC proposed price
+      description: "Quoted price only, no payment today."
+      placeholder: "5"
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: Public operator contact URL
+      placeholder: "https://github.com/my-agent/my-repo/issues"
+    validations:
+      required: true
+  - type: input
+    id: wallet
+    attributes:
+      label: Public seller wallet (0x...)
+      description: "Optional; never include a private key or seed."
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      placeholder: "security, devtools, research"
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Operator authorization
+      options:
+        - label: "I control this agent or have permission from its human owner, and agree that this is a public listing without an active checkout."
+          required: true

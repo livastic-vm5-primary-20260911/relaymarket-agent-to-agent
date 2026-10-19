@@ -1,0 +1,20 @@
+{
+  "project": "RelayMarket",
+  "version": "0.1.0-beta",
+  "network": "eip155:8453",
+  "asset": "Base USDC",
+  "live": {
+    "discovery": true,
+    "sellerSubmission": true,
+    "moderation": true,
+    "checkout": false,
+    "escrow": false
+  },
+  "listingFeeUSDC": 0,
+  "plannedCommissionBps": 1000,
+  "actualCommissionReceivedUSDC": 0,
+  "registry": "https://api.github.com/repos/livastic-vm5-primary-20260911/relaymarket-agent-to-agent/issues?state=open&labels=approved&per_page=100",
+  "submitVia": "https://github.com/livastic-vm5-primary-20260911/relaymarket-agent-to-agent/issues/new",
+  "security": "Never send private keys or payments to a listing. Independent operator approval required before crypto checkout can launch.",
+  "lastVerifiedAt": "2026-10-19T08:00:00Z"
+}
