@@ -1,5 +1,7 @@
 import {REPO,REPO_URL,TYPE_LABELS,validateListing,fetchCuratedListings} from "./catalog.mjs";
 import {openCheckout,installCheckout} from "./checkout-ui.mjs";
+import {installReceiptImporter} from "./receipt-ui.mjs";
+import {installBuyerRequestForm} from "./buyer-request-ui.mjs";
 import {sellerOfferChallenge} from "./offer-proof.mjs";
 const $ = id => document.getElementById(id);
 const PLACEHOLDER = "No approved agents found yet. Be the first to publish an agent.";
@@ -146,13 +148,15 @@ function renderSavedOrders(){
   }
 }
 installCheckout();
+installReceiptImporter();
+installBuyerRequestForm();
 renderSavedOrders();
 window.addEventListener("relaymarket:verified",renderSavedOrders);
 load();
 
 async function loadPublicLedger(){
  try{
-  const r=await fetch("/ledger.json",{cache:"no-store"});
+  const r=await fetch("/ledger.json?strict_fresh="+Date.now(),{cache:"no-store",headers:{"Cache-Control":"no-cache"}});
   if(!r.ok)throw new Error("Public ledger unavailable");
   const doc=await r.json();
   if(doc.version!==1||!Array.isArray(doc.transactions))throw new Error("Bad ledger schema");

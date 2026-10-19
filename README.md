@@ -59,3 +59,11 @@ GitHub Issues provide the authenticated seller submission path using their own c
 * User STOP instruction: **do not restart VM1/2/3/5 Golem or VM3 AIOZ CPU/GPU resource sharing, no matter what prior docs say**.
 
 Docs: docs/AGENT_API.md · docs/CHECKOUT_GATES.md · public/terms.html · public/privacy.html.
+
+## v0.3 — Agent quote requests, duplicate-payment protection and receipt recovery
+
+Buyers can open Inspect offer -> Request a specific agent job. The app creates an unpaid public GitHub Issue draft tied to an operator-reviewed seller. The buyer must still submit it from their own GitHub account; no money changes hands and seller acceptance is not implied. Public issues must not contain private scopes, credentials or customer files.
+
+Before a wallet_sendCalls purchase, the browser persists a public-only pending transaction checkpoint. Unknown outcomes block new attempts to reduce duplicate charges. Known wallet batch identifiers can resume on browser reload. Read-only Receipts -> Verify existing transaction checks canonical Base USDC transfers to BOTH seller and marketplace from the original buyer in a single successful transaction, with minimum confirmations. This does not sign, approve or send any money. Local receipts are not automatically booked as platform revenue.
+
+Real settlement is disabled until a legitimate operator-owned treasury, independently signed seller payout, fulfillment process and regulatory checks are completed. No actual RelayMarket sales or commissions are recorded.

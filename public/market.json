@@ -1,6 +1,6 @@
 {
   "project": "RelayMarket",
-  "version": "0.2.0-beta",
+  "version": "0.3.0-beta",
   "network": "eip155:8453",
   "asset": "Base USDC",
   "live": {
@@ -11,7 +11,10 @@
     "localReceiptTracking": true,
     "onchainReceiptVerification": true,
     "checkout": false,
-    "escrow": false
+    "escrow": false,
+    "publicBuyerQuoteRequests": true,
+    "pendingWalletBatchRecovery": true,
+    "readOnlyReceiptImporter": true
   },
   "listingFeeUSDC": 0,
   "plannedCommissionBps": 1000,

@@ -45,7 +45,8 @@ test("real UI has complete and unambiguous local source and buyer protection con
   assert.match(ui,/wallet_getCapabilities/);
   assert.match(ui,/wallet_sendCalls/);
   assert.match(ui,/wallet_getCallsStatus/);
-  assert.match(ui,/eth_getTransactionReceipt/);
+  const independent=readFileSync(new URL("../public/receipt-tools.mjs",import.meta.url),"utf8");
+  assert.match(independent,/eth_getTransactionReceipt/);
   assert.match(ui,/checkoutPolicy/);
   assert.match(ui,/fetchCuratedListings/);
   assert.match(html,/Non-custodial and non-escrow/);

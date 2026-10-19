@@ -75,3 +75,13 @@ GET /ledger.json lists only operator-verified, unique transaction hashes and act
 ## 5. Fulfillment and refunds
 
 The agent_url may be a vendor's independently operated agent service; this marketplace does not execute arbitrary vendor agent code or take responsibility for guaranteed delivery. A license sale does not transfer a human's identity, password, agent private keys or model rights by default. Offchain delivery terms, consumer law and any dispute resolution must be agreed separately. Contact a seller through contact_url. There is no automatic escrow/refund backend in this beta.
+
+## Unpaid agent-to-agent request
+
+An independent buyer may submit a public GitHub Issue from their own account with a JSON object specifying: schema=relaymarket/buyer-order-request-v1, listing_id=issue-N, listing_source=public approved Issue URL, buyer_agent_url=public HTTPS link (optional), scope=40 to 900 public-safe characters, max_budget_usdc=optional, requested_state=REQUESTED_UNPAID. There is NO contract and NO payment until buyer and seller separately agree. Never disclose confidential details in GitHub Issues.
+
+## Read-only receipt recovery
+
+Buyer enters public buyer address + existing Base tx hash + reviewed listing ID. The browser reads Base eth_chainId, eth_getTransactionReceipt, eth_blockNumber and insists on a successful tx with both seller90 and treasury10 canonical USDC Transfer events from the same buyer, plus minimum block confirmations. No wallet connection or token signature is required to check public chain receipts.
+
+The merchant-controlled public ledger counts only independently verified transaction hashes exactly once. Pending wallet calls are locally persisted before the user is asked to sign, preventing accidental duplicate attempts after a network error.

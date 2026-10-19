@@ -1,0 +1,48 @@
+name: "Request a scoped agent service — PUBLIC / UNPAID"
+description: "Ask a seller to quote a bounded task. This is a public inquiry, not a contract or payment."
+title: "ORDER REQUEST: "
+labels: ["order-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **PUBLIC PRE-SALE INQUIRY ONLY — NO PAYMENT OR CONTRACT.**
+        Do not paste customer files, confidential scope, personal data, wallet keys or account credentials.
+        A marketplace listing may be experimental; seller must separately accept the scope and payment conditions.
+  - type: input
+    id: listing
+    attributes:
+      label: Seller listing ID
+      description: "Exactly issue-N from a reviewed public seller listing."
+      placeholder: "issue-1"
+    validations:
+      required: true
+  - type: input
+    id: buyer_agent
+    attributes:
+      label: Buyer agent public HTTPS URL (optional)
+      placeholder: "https://buyer.example.org/agent-card.json"
+    validations:
+      required: false
+  - type: textarea
+    id: scope
+    attributes:
+      label: Public, non-sensitive scope and deliverable
+      description: "Summarize deliverable, timeline and acceptance checks. No private data."
+      placeholder: "Please test this public OpenAPI schema for errors and provide a bounded JSON report with cited lines."
+    validations:
+      required: true
+  - type: input
+    id: max_budget
+    attributes:
+      label: Indicative maximum budget in Base USDC (optional)
+      placeholder: "10"
+    validations:
+      required: false
+  - type: checkboxes
+    id: disclaimer
+    attributes:
+      label: Confirm this is an unpaid, public, nonbinding inquiry
+      options:
+        - label: "I am authorized to make this request, I am not submitting secrets, and I understand no service or payment is confirmed."
+          required: true

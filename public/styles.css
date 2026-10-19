@@ -39,3 +39,31 @@
 
 
 .seller-proof-box{grid-column:1/-1;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 14px;border:1px solid #dbe6dd;border-radius:10px;background:#f4faf5}.seller-proof-box .btn{font-size:12px;padding:12px}.seller-proof-box span{font-size:11px;line-height:1.6;color:#4d7661;max-width:480px}
+
+/* Read-only receipt recovery, no wallet or transaction approval required */
+.receipt-recovery{margin:20px 0 10px;border:1px solid #cbdbcf;border-radius:11px;background:#f7fbf7;overflow:hidden}
+.receipt-recovery summary{cursor:pointer;padding:16px;font-size:13px;font-weight:750;color:#174e38}
+.receipt-recovery[open]{padding-bottom:17px}
+.receipt-recovery p{margin:5px 16px 18px;font-size:12px;color:#567365;line-height:1.7}
+.receipt-import-form{margin:0 16px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.receipt-import-form label{display:flex;flex-direction:column;gap:8px;font-size:12px;font-weight:700;color:#42574b}
+.receipt-import-form label:first-child{grid-column:1/-1}
+.receipt-import-form input,.receipt-import-form select{width:100%;padding:12px;border:1px solid #d1dfd4;border-radius:7px;background:#fff;font-size:12px}
+.receipt-import-form button{grid-column:1/-1;justify-self:start}
+#verify-import-status[data-success="true"]{color:#11663f;font-weight:700}
+@media(max-width:620px){.receipt-import-form{grid-template-columns:1fr}.receipt-import-form label:first-child,.receipt-import-form button{grid-column:auto}}
+
+
+/* Free, explicitly public buyer inquiry with GitHub-account provenance */
+.buyer-inquiry{border:1px solid #d0dfd6;border-radius:11px;background:#f5fbf7;margin:23px 0 16px}
+.buyer-inquiry>summary{padding:16px;cursor:pointer;color:#17573a;font-size:12px;font-weight:780}
+.buyer-inquiry>p{padding:0 17px;color:#627c6c;font-size:12px;line-height:1.7}
+.buyer-request-form{display:grid;grid-template-columns:1fr 1fr;gap:13px;padding:0 16px 17px}
+.buyer-request-form>label:first-child{grid-column:1/-1}
+.buyer-request-form label{font-size:12px;font-weight:700;color:#3b5846;display:flex;flex-direction:column;gap:7px}
+.buyer-request-form input,.buyer-request-form textarea{width:100%;padding:11px;background:#fff;border:1px solid #cbddcf;border-radius:7px;font-size:12px}
+.buyer-request-form .buyer-request-checkbox{grid-column:1/-1;display:flex;flex-direction:row;align-items:start;font-weight:400;line-height:1.5}
+.buyer-request-checkbox input{width:auto;margin:3px 5px 0 0}
+.buyer-request-form button{justify-self:start;grid-column:1/-1}
+#buyer-request-status{grid-column:1/-1;color:#246244;font-size:12px;line-height:1.7}
+@media(max-width:620px){.buyer-request-form{grid-template-columns:1fr}.buyer-request-form>label:first-child,.buyer-request-form .buyer-request-checkbox,.buyer-request-form button,#buyer-request-status{grid-column:1}}

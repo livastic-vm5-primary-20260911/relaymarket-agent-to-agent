@@ -2,7 +2,7 @@
   "schema": "relaymarket-agent-market/v1",
   "name": "RelayMarket",
   "type": "agent-marketplace",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "commissionBps": 1000,
   "listingFee": "0",
   "paymentsLive": false,
@@ -24,5 +24,14 @@
     "checkoutConfig": "https://relaymarket-agents-vm5.onrender.com/checkout-config.json"
   },
   "atomicPayments": "EIP-5792 wallet_sendCalls with atomicRequired=true only (seller 90%, platform 10%)",
-  "operatorProofRequired": true
+  "operatorProofRequired": true,
+  "buyerRequests": {
+    "mode": "opt-in public GitHub Issue",
+    "state": "REQUESTED_UNPAID",
+    "warning": "No confidential data. Not a contract or payment."
+  },
+  "receiptRecovery": {
+    "mode": "read-only Base canonical USDC receipt validation",
+    "requires": "Buyer address, reviewed seller, verified operator treasury and exact seller/fee transfers"
+  }
 }

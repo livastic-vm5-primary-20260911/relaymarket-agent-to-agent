@@ -95,7 +95,7 @@ export function validateCuratedListing(item) {
   return {...clean,id:item.id,owner:item.owner,issue_url,reviewedAt:String(item.reviewedAt??""),delivery_terms:String(item.delivery_terms??"").slice(0,1200),payoutVerified:item.payoutVerified===true,deliveryTermsVerified:item.deliveryTermsVerified===true,paymentEnabled:item.paymentEnabled===true};
 }
 export async function fetchCuratedListings(fetcher = fetch) {
-  const response=await fetcher(CURATED_URL,{cache:"no-store"});
+  const response=await fetcher(CURATED_URL+"?strict_fresh="+Date.now(),{cache:"no-store",headers:{"Cache-Control":"no-cache"}});
   if(!response.ok)throw new Error("Approved registry not available (HTTP "+response.status+").");
   const doc=await response.json();
   if(!doc || doc.version!==2 || !Array.isArray(doc.listings))throw new Error("Invalid curated registry version.");
